@@ -68,8 +68,39 @@ Step 1. Start node to listen for RPC requests: `cd ethnodes` and then `geth --da
 
 Step 2. Create another terminal and try some curl commands.
 
-View blockNumber: `curl -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' -H "Content-Type: application/json" localhost:8545`.
+view blockNumber: `curl -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' -H "Content-Type: application/json" localhost:8545`.
 
-View chainId: `curl -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}' -H "Content-T
+view chainId: `curl -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}' -H "Content-T
 ype: application/json" localhost:8545`.
 
+view accounts: `curl -X POST --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":1}' -H "Content-
+Type: application/json" localhost:8545`.
+
+unlock account: `curl -X POST --data '{"jsonrpc":"2.0","method":"personal_unlockAccount","params":["0xf1e20a2db759693c3b19eda5154eb13d0ff14472","123456"],"id":1}' -H "Content-Type: application/json" localhost:8545`.
+
+send transaction: `curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendTransaction","params":[{"from":"0xf1e20a2db759693c3b19eda5154eb13d0ff14472","to":"0x1fe1a8a7417cd979810c704be6c49affe0b8f7d5","value":"0x100000000000"}],"id":1}' -H "Content-Type: application/json" localhost:8545`.
+
+......
+
+Step 3. Listening to RPC while still being able to connect to the console: `geth attach http://localhost:8545`.
+
+Step 4. Other methods (see in `geth-rpc-methods.txt`) found by printing services in func `ServeCodec` in `./go-ethereum-1.9.2/rpc/server.go`.
+
+```Go: server.go
+func (s *Server) ServeCodec(codec ServerCodec, options CodecOption) {
+	defer codec.Close()
+
+	// Don't serve if server is stopped.
+	if atomic.LoadInt32(&s.run) == 0 {
+		return
+	}
+
+	// Add the codec to the set so it can be closed by Stop.
+	s.codecs.Add(codec)
+	defer s.codecs.Remove(codec)
+	^fmt.Println(s.services.services)
+	c := initClient(codec, s.idgen, &s.services)
+	<-codec.Closed()
+	c.Close()
+}
+```
