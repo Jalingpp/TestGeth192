@@ -84,7 +84,7 @@ Step 3. Listening to RPC while still being able to connect to the console: `geth
 
 Step 4. Other methods (see in `geth-rpc-methods.txt`) found by printing services in func `ServeCodec` in `./go-ethereum-1.9.2/rpc/server.go`.
 
-```go: server.go
+```go:server.go
 func (s *Server) ServeCodec(codec ServerCodec, options CodecOption) {
 	defer codec.Close()
 
