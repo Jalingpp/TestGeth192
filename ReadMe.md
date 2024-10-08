@@ -47,8 +47,6 @@ Step 8. New another account and make a transfer: new account by `personal.newAcc
 
 Step 9. You can write multiple console commands into JavaScript and execute them all at once in the console.
 
-Example: sendTransactions.
-
 ```JavaScript:sendTx.js
 var fromAddress = web3.eth.accounts[0];
 var toAddress = web3.eth.accounts[1];
@@ -98,9 +96,10 @@ func (s *Server) ServeCodec(codec ServerCodec, options CodecOption) {
 	// Add the codec to the set so it can be closed by Stop.
 	s.codecs.Add(codec)
 	defer s.codecs.Remove(codec)
-	^fmt.Println(s.services.services)
+	fmt.Println(s.services.services)
 	c := initClient(codec, s.idgen, &s.services)
 	<-codec.Closed()
 	c.Close()
 }
 ```
+7:^
