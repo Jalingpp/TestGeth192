@@ -98,7 +98,7 @@ func (s *Server) ServeCodec(codec ServerCodec, options CodecOption) {
 	// Add the codec to the set so it can be closed by Stop.
 	s.codecs.Add(codec)
 	defer s.codecs.Remove(codec)
-	^fmt.Println(s.services.services)
+	fmt.Println(s.services.services)^
 	c := initClient(codec, s.idgen, &s.services)
 	<-codec.Closed()
 	c.Close()
