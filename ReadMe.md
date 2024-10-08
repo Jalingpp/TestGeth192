@@ -15,7 +15,7 @@ Step 2. New a folder for nodes beside go-ethereum-1.9.2: `mkdir ethnodes`.
 
 Step 3. Generate `genesis.json` File in `ethnodes`. Copy the following content into the file.
 
-```genesis.json
+```json:genesis.json
 {
     "config": {
       "chainId": 200,
@@ -33,6 +33,6 @@ Step 3. Generate `genesis.json` File in `ethnodes`. Copy the following content i
     "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
     "timestamp": "0x00"
 }
-^return
+```
 
-Step 4. 
+Step 4. Initialize a node of the private blockchain: `cd ethnodes` and then `geth --datadir ./ init ./genesis.json`.
