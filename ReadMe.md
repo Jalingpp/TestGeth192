@@ -4,7 +4,11 @@ A tutorial on "Building and Maintaining Private Blockchains with go-ethereum-1.9
 ## 1. Download Go-ethereum-1.9.2
 The installation package is `go-ethereum-1.9.2.zip`, or download other releases from `https://github.com/ethereum/go-ethereum/releases`.
 
-Building geth requires both a Go (version 1.22 or later) and a C compiler. You can install them using your favourite package manager. Once the dependencies are installed, run `make geth`.
+Building geth requires both a Go (version 1.22 or later) and a C compiler. You can install them using your favourite package manager. 
+
+Init go.mod by `go mod init github.com/ethereum/go-ethereum`.
+
+Build geth by `make geth`.
 
 You can change the source codes and rebuild.
 
